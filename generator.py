@@ -5,8 +5,6 @@ from telethon.sync import TelegramClient
 import re
 from config import (token, debug, url, bot, api_id, api_hash)
 import os
-
-
 from getClientSession import send_req, client, enter_req, get_phone
 
 
@@ -50,11 +48,17 @@ def generate(message):
     # bot.register_next_step_handler(phone_req, recieved_phone)
 
 
-    # client.send_code_request(phone_number)
-    # myself = client.sign_in(phone_number, input('Enter code: '))
-    # If .sign_in raises PhoneNumberUnoccupiedError, use .sign_up instead
-    # If .sign_in raises SessionPasswordNeeded error, call .sign_in(password=...)
-    # You can import both exceptions from telethon.errors.
+@bot.message_handler(commands=["start", "Start"])
+def start(message):
+    userid = message.from_user.id
+    
+    answer = """Hi there, session generator
+To generate a string session use the <pre>/generate</pre> command
+You will be asked of your phone number
+<b>Reply</b> with a valid phone number including country code <pre>e.g +2349054343423"</pre>
 
+You will be asked to input verification code sent to you by telegram
+<b>Reply</b> message with a prefix "code" then the number. example <pre>code23232</pre>
 
-    pass
+    """
+    bot.send_message(userid, text=answer)
