@@ -61,4 +61,4 @@ You will be asked to input verification code sent to you by telegram
 <b>Reply</b> message with a prefix "code" then the number. example <pre>code23232</pre>
 
     """
-    bot.send_message(userid, text=answer)
+    bot.send_message(userid, text=answer, parse_mode="html")
